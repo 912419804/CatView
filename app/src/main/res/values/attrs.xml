@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="HorizontalProgress">
+        <attr name="reachBar_color" format="color"/>
+        <attr name="unReachBar_color" format="color"/>
+        <attr name="des_color" format="color"/>
+        <attr name="des_margin" format="dimension"/>
+        <attr name="des_size" format="dimension"/>
+        <attr name="reachBar_height" format="dimension"/>
+        <attr name="unReachBar_height" format="dimension"/>
+    </declare-styleable>
+
+</resources>
