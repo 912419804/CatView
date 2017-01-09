@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by Administrator on 2017/1/8.
@@ -55,7 +57,6 @@ public class WatchView extends View {
     private float hourRadius;
 
 
-
     public WatchView(Context context) {
         this(context, null);
     }
@@ -70,11 +71,12 @@ public class WatchView extends View {
     }
 
     private void initView() {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
         //表盘画笔
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(Color.WHITE);
         mPaint.setAntiAlias(true);
-        mPaint.setShadowLayer(10,0,0,Color.DKGRAY);
+        mPaint.setShadowLayer(10, 0, 0, Color.DKGRAY);
         //小时刻度画笔
         hourPaint.setStyle(Paint.Style.STROKE);
         hourPaint.setColor(Color.BLACK);
@@ -119,7 +121,7 @@ public class WatchView extends View {
         //画刻度,每个刻度旋转6度，从12点的位置画起
         Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
         float fontHeight = fontMetrics.descent - fontMetrics.ascent;
-        Log.e("font height",fontHeight+"");
+        Log.e("font height", fontHeight + "");
         for (int i = 0; i < 60; i++) {
             if (i % 5 != 0) {
                 canvas.drawLine(-hourRadius, 0, -hourRadius + secSize, 0, secPaint);
@@ -138,7 +140,7 @@ public class WatchView extends View {
                 canvas.save();
                 canvas.translate(0, -hourRadius + hourSize + 15 + textHeight / 2);
                 canvas.rotate(-6 * i);
-                canvas.drawText(hour, -(rect.right + rect.left) / 2, -(rect.bottom+rect.top)/2, textPaint);
+                canvas.drawText(hour, -(rect.right + rect.left) / 2, -(rect.bottom + rect.top) / 2, textPaint);
                 canvas.restore();
             }
             canvas.rotate(6);
@@ -146,24 +148,26 @@ public class WatchView extends View {
         canvas.restore();//重新将坐标原点恢复到画布中心
         canvas.save();
         //画时分秒的指针
-        Calendar mCalendar = Calendar.getInstance();
+        Calendar mCalendar = Calendar.getInstance(Locale.CHINESE);
         int hour = mCalendar.get(Calendar.HOUR);
         int minute = mCalendar.get(Calendar.MINUTE);
         int second = mCalendar.get(Calendar.SECOND);
         float hourAngel = hour / 12.0f * 360;
         float minuteAngel = minute / 60.f * 360;
-        float secondAngel = second /60.f  * 360;
-        Log.w("secondAngel",secondAngel+"");
+        float secondAngel = second / 60.f * 360;
+        hourAngel += minute / 60.f * 30;
+        minuteAngel += second / 60.f * 6;
+        Log.w("secondAngel", secondAngel + "");
         //绘制时针
         canvas.rotate(hourAngel);
         hourPaint.setStrokeWidth(12);
-        canvas.drawLine(0,20,0,-100,hourPaint);
+        canvas.drawLine(0, 20, 0, -100, hourPaint);
         canvas.restore();
         //绘制分针
         canvas.save();
         canvas.rotate(minuteAngel);
         hourPaint.setStrokeWidth(10);
-        canvas.drawLine(0,20,0,-120,hourPaint);
+        canvas.drawLine(0, 20, 0, -120, hourPaint);
         canvas.restore();
         //绘制秒针
         canvas.save();
@@ -171,7 +175,7 @@ public class WatchView extends View {
         hourPaint.setStrokeWidth(6);
         hourPaint.setColor(Color.RED);
         hourPaint.setStyle(Paint.Style.FILL);
-        canvas.drawLine(0,20,0,-hourRadius,hourPaint);
+        canvas.drawLine(0, 20, 0, -hourRadius, hourPaint);
         canvas.restore();
         //画中心的红色小圆盘
         canvas.save();
