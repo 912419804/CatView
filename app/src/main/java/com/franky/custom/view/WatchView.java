@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -148,7 +147,7 @@ public class WatchView extends View {
         canvas.restore();//重新将坐标原点恢复到画布中心
         canvas.save();
         //画时分秒的指针
-        Calendar mCalendar = Calendar.getInstance(Locale.CHINESE);
+        Calendar mCalendar = Calendar.getInstance();
         int hour = mCalendar.get(Calendar.HOUR);
         int minute = mCalendar.get(Calendar.MINUTE);
         int second = mCalendar.get(Calendar.SECOND);

@@ -12,7 +12,7 @@ import com.franky.custom.bean.Pie;
 
 /**
  * Created by franky on 2016/12/31.
- * 绘制图形基本案例
+ * 绘制扇形
  */
 
 public class CircularChart3 extends View {
