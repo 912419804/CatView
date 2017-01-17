@@ -9,15 +9,18 @@ import java.util.Set;
 
 /**
  * Created by Administrator on 2017/1/13.
- * 生成日期
+ * 生成某年所有的日期
  */
 
 public class DateFactory {
 
+    /**平年map，对应月份和天数**/
     private static HashMap<Integer,Integer> monthMap = new LinkedHashMap<>(12);
+    /**闰年map，对应月份和天数**/
     private static HashMap<Integer,Integer> leapMonthMap = new LinkedHashMap<>(12);
 
     static {
+        //初始化map,只有2月份不同
         monthMap.put(1,31);leapMonthMap.put(1,31);
         monthMap.put(2,28);leapMonthMap.put(2,29);
         monthMap.put(3,31);leapMonthMap.put(3,31);
@@ -35,7 +38,6 @@ public class DateFactory {
     /**
      * 输入年份和1月1日是周几
      * 闰年为366天,平年为365天
-     *
      * @param year    年份
      * @param weekday 该年1月1日为周几
      * @return 该年1月1日到12月31日所有的天数
@@ -49,7 +51,7 @@ public class DateFactory {
         for (int i = 1; i <= dayNum; i++) {
             day = new Day();
             day.year = year;
-            //计算当天为周几
+            //计算当天为周几,如果大于7就重置1
             day.week = lastWeekday<= 7 ? lastWeekday : 1;
             //计算当天为几月几号
             int[] monthAndDay = getMonthAndDay(isLeapYear, i);
@@ -67,9 +69,9 @@ public class DateFactory {
 
     /**
      * 获取月和日
-     * @param isLeapYear
-     * @param currentDay
-     * @return
+     * @param isLeapYear 是否闰年
+     * @param currentDay 当前天数
+     * @return 包含月和天的数组
      */
     public static int[] getMonthAndDay(boolean isLeapYear,int currentDay) {
         HashMap<Integer,Integer> maps = isLeapYear?leapMonthMap:monthMap;
@@ -93,7 +95,6 @@ public class DateFactory {
 
     /**
      * 判断是闰年还是平年
-     *
      * @param year 年份
      * @return true 为闰年
      */
@@ -101,6 +102,10 @@ public class DateFactory {
         return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
 
+    /**
+     * 检测生成的天数是否正常
+     * @param days
+     */
     private static void checkDays(List<Day> days) {
         if (days == null) {
             throw new IllegalArgumentException("天数为空");
@@ -111,6 +116,7 @@ public class DateFactory {
     }
 
     public static void main(String[] args){
+        //test
         List<Day> days = DateFactory.getDays(2016, 5);
         for (int i = 0; i < days.size(); i++) {
             System.out.println(days.get(i).toString());
