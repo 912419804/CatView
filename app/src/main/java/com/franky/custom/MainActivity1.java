@@ -29,7 +29,7 @@ public class MainActivity1 extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_pro:
-                startActivity(new Intent(this,ProgressActivity.class));
+                startActivity(new Intent(this,HorizontalProgressActivity.class));
                 break;
             case R.id.bt_lv:
                 startActivity(new Intent(this,ListViewActivity.class));

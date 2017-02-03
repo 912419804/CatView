@@ -3,12 +3,14 @@ package com.franky.custom;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
+import com.franky.custom.base.BaseActivity;
 import com.franky.custom.view.CircleProgressBar;
 
-public class MainActivityForCircleProgressBarTest extends AppCompatActivity implements View.OnClickListener {
+/**
+ * 带刻度圆形进度条
+ */
+public class CircleProgressActivity extends BaseActivity {
 
     private CircleProgressBar cpb;
     private int progress = 0;
@@ -33,29 +35,8 @@ public class MainActivityForCircleProgressBarTest extends AppCompatActivity impl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_circleprogress);
         cpb = (CircleProgressBar) findViewById(R.id.cc_chart);
         mHandler.sendEmptyMessageDelayed(Integer.MAX_VALUE, 200);
-    }
-
-    //    private void drawChart() {
-//        Pie pie1 = new Pie(50);
-//        Pie pie2 = new Pie(50);
-//        Pie pie3 = new Pie(50);
-//        Pie pie4 = new Pie(50);
-//        Pie pie5 = new Pie(50);
-//        Pie[] pies = {pie1, pie2, pie3,pie4,pie5};
-//        CircularChart3 chart = (CircularChart3) findViewById(R.id.cc_chart);
-//        chart.setData(pies);
-//    }
-    private void drawChart() {
-    }
-
-    private void initView() {
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

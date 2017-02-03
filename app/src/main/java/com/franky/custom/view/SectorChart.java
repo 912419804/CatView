@@ -3,7 +3,6 @@ package com.franky.custom.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -13,10 +12,10 @@ import com.franky.custom.bean.Pie;
 
 /**
  * Created by franky on 2016/12/31.
- * 绘制图形基本案例
+ * 绘制扇形
  */
 
-public class CircularChart extends View {
+public class SectorChart extends View {
 
     private int[] mColors = {0xFFCCFF00, 0xFF6495ED, 0xFFE32636, 0xFF800000, 0xFF808000, 0xFFFF8C69, 0xFF808080,
             0xFFE6B800, 0xFF7CFC00};
@@ -26,16 +25,17 @@ public class CircularChart extends View {
     private RectF mRectF;
     private int mWidth;
     private int mHeight;
+    private boolean isFirstDraw = true;
 
-    public CircularChart(Context context) {
+    public SectorChart(Context context) {
         this(context, null);
     }
 
-    public CircularChart(Context context, AttributeSet attrs) {
+    public SectorChart(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CircularChart(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SectorChart(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
@@ -44,12 +44,12 @@ public class CircularChart extends View {
         this.mContext = getContext();
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.BLUE);
-        mPaint.setStrokeWidth(6);
+        mPaint.setStyle(Paint.Style.FILL);
+//        mPaint.setColor(Color.RED);
+        mPaint.setStrokeJoin(Paint.Join.MITER);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeMiter(10);
+        mPaint.setStrokeWidth(20);
     }
 
     @Override
@@ -62,6 +62,8 @@ public class CircularChart extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         this.mWidth = w;
         this.mHeight = h;
+        float r = (float) (mWidth * 0.8 / 2);
+        mRectF = new RectF(-r, -r, r, r);
     }
 
     @Override
@@ -72,15 +74,43 @@ public class CircularChart extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.translate(mWidth/2,mHeight/2);
-        setLayerType(LAYER_TYPE_SOFTWARE,null);
-        RectF rectF = new RectF(-200, -200, 200, 200);
-        canvas.drawRect(rectF,mPaint);
-        for (int i=0;i<40;i++){
-            mPaint.setColor(mColors[i%mColors.length]);
-            canvas.scale(0.9f,0.9f);
-            canvas.drawRect(rectF,mPaint);
+        canvas.translate(mWidth / 2, mHeight / 2);
+        if (mPies == null || mPies.length <= 0) {
+            return;
         }
+        int length = mPies.length;
+        float startAngle = -90f;
+        for (int i = 0; i < length; i++) {
+            mPaint.setColor(mColors[i % mColors.length]);
+            canvas.drawArc(mRectF, startAngle, mPies[i].angle, true, mPaint);
+            startAngle += mPies[i].angle;
+        }
+
+    }
+
+
+    public void setData(Pie[] pies) {
+        this.mPies = pies;
+        initData();
+        invalidate();
+    }
+
+    private void initData() {
+        if (mPies == null || mPies.length <= 0) {
+            return;
+        }
+//        计算每个数据所占的比例和角度
+        float count = 0;
+        for (Pie pie : mPies) {
+            count += pie.num;
+        }
+        if (count <= 0) {
+            return;
+        }
+        for (Pie pie : mPies) {
+            pie.angle = 360f * (pie.num / count);
+        }
+
     }
 
 }

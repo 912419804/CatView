@@ -1,15 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     >
 
-    <com.franky.custom.view.GitHubContributionView
-        android:id="@+id/cc_chart"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_wrappingPaper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="包装纸效果"/>
+
+        <Button
+            android:id="@+id/bt_lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="折线图效果"/>
+
+        <Button
+            android:id="@+id/bt_radarChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="雷达图效果"/>
+
+        <Button
+            android:id="@+id/bt_watch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="时钟效果"/>
+        <Button
+            android:id="@+id/bt_github"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="github提交效果"/>
+
+        <Button
+            android:id="@+id/bt_horizontalProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="水平进度条效果"/>
+
+        <Button
+            android:id="@+id/bt_circleProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="圆形刻度进度条效果"/>
+
+        <Button
+            android:id="@+id/bt_sectorChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="扇形图效果"/>
+
+        <Button
+            android:id="@+id/bt_canvasScale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Canvas缩放效果"/>
+
+        <Button
+            android:id="@+id/bt_font"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义字体效果"/>
+        <Button
+            android:id="@+id/bt_bezierCurve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="贝塞尔曲线效果"/>
+
+    </LinearLayout>
+
+</ScrollView>

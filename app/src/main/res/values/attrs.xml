@@ -12,4 +12,7 @@
         <attr name="unReachBar_height" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="FontTextView">
+        <attr name="font" format="string|reference"/>
+    </declare-styleable>
 </resources>

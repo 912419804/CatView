@@ -3,15 +3,19 @@ package com.franky.custom;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 
+import com.franky.custom.base.BaseActivity;
 import com.franky.custom.view.HorizontalProgress;
+
+import butterknife.BindView;
 
 /**
  * Created by Administrator on 2016/7/11.
+ * 自定义水平进度条
  */
-public class ProgressActivity extends AppCompatActivity {
+public class HorizontalProgressActivity extends BaseActivity {
 
+    @BindView(R.id.hp_progress)
     HorizontalProgress hp;
 
     Handler mHandler = new Handler() {
@@ -34,9 +38,14 @@ public class ProgressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.progress_activity);
+        setContentView(R.layout.activity_horizontalprogress);
+
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
         hp = (HorizontalProgress) findViewById(R.id.hp_progress);
         mHandler.sendEmptyMessage(1);
-
     }
 }

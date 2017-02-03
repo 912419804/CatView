@@ -4,19 +4,32 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:hardwareAccelerated="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:screenOrientation="landscape">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ProgressActivity"/>
+        <activity android:name=".CanvasScaleActivity"/>
+        <activity android:name=".LineChartActivity"/>
+        <activity android:name=".HorizontalProgressActivity"/>
+        <activity android:name=".RadarChartActivity"/>
+        <activity android:name=".WrappingPaperActivity"/>
+        <activity android:name=".BezierCurveActivity"/>
+        <activity android:name=".CircleProgressActivity"/>
+        <activity android:name=".FontActivity"/>
+        <activity
+            android:name=".GitHubActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".SectorChartActivity"/>
+        <activity android:name=".WatchActivity"/>
+
         <activity android:name=".ListViewActivity"/>
     </application>
 
