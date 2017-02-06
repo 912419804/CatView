@@ -1,6 +1,10 @@
 package com.franky.custom;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,11 +39,29 @@ public class MainActivity extends BaseActivity {
     Button bt_wrappingPaper;
     @BindView(R.id.bt_github)
     Button bt_github;
+    @BindView(R.id.bt_pathMeasure)
+    Button bt_pathMeasure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        Log.d("handler", msg.what + "");
+                    }
+                };
+                handler.sendEmptyMessage(1);
+                Looper.loop();
+            }
+        }).start();
     }
 
     @Override
@@ -47,7 +69,7 @@ public class MainActivity extends BaseActivity {
         super.initView();
         setMoreOnclickListener(bt_bezierCurve, bt_canvasScale, bt_circleProgress
                 , bt_font, bt_horizontalProgress, bt_lineChart, bt_radarChart
-                , bt_sectorChart, bt_watch, bt_wrappingPaper,bt_github);
+                , bt_sectorChart, bt_watch, bt_wrappingPaper, bt_github,bt_pathMeasure);
     }
 
     @Override
@@ -65,6 +87,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.bt_github:
                 startActivity(GitHubActivity.class);
+                break;
+            case R.id.bt_pathMeasure:
+                startActivity(PathMeasureActivity.class);
                 break;
             case R.id.bt_font:
                 startActivity(FontActivity.class);

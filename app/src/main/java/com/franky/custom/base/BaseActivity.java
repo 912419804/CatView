@@ -3,10 +3,14 @@ package com.franky.custom.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
 
@@ -16,6 +20,33 @@ import butterknife.ButterKnife;
  */
 
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+
+    static class MyHandler extends Handler{
+
+        WeakReference<Activity> mReference;
+
+        public MyHandler(Activity activity) {
+            mReference = new WeakReference<Activity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (mReference.get() != null){
+                //do something
+            }
+        }
+    }
+
+    private MyHandler mMyHandler = new MyHandler(this);
+
+    @Override
+    protected void onDestroy() {
+        mMyHandler.removeCallbacksAndMessages(null);
+        super.onDestroy();
+    }
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
@@ -55,10 +86,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
     @Override
     public void onClick(View v) {

@@ -21,6 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="折线图效果"/>
+        <Button
+            android:id="@+id/bt_pathMeasure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="路径动画效果"/>
 
         <Button
             android:id="@+id/bt_radarChart"
