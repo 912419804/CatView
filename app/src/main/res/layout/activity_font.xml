@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+    <com.franky.custom.view.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="自定义字体效果"
+        app:font="Lobster-1.4.otf"/>
+
+    <com.franky.custom.view.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="自定义字体效果"
+        app:font="FZLanTingHeiS-L-GB-Regular.TTF"/>
+
+    <com.franky.custom.view.FontTextView
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义字体效果"
+        app:font="FZLanTingHeiS-DB1-GB-Regular.TTF"/>
+
+    <com.franky.custom.view.FontTextView
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义字体效果"
+        app:font="Futura-CondensedMedium.ttf"/>
+</LinearLayout>
